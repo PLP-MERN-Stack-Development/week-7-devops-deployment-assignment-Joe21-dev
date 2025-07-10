@@ -1,3 +1,4 @@
+
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19940785&assignment_repo_type=AssignmentRepo)
 # Deployment and DevOps for MERN Applications
 
@@ -12,11 +13,7 @@ You will:
 4. Set up CI/CD pipelines with GitHub Actions
 5. Implement monitoring and maintenance strategies
 
-## Getting Started
-
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week7-Assignment.md` file
+## Getting Starte
 4. Use the provided templates and configuration files as a starting point
 
 ## Files Included
@@ -76,3 +73,6 @@ Your work will be automatically submitted when you push to your GitHub Classroom
 - [Railway Documentation](https://docs.railway.app/)
 - [Vercel Documentation](https://vercel.com/docs)
 - [Netlify Documentation](https://docs.netlify.com/) 
+=======
+# SimpleChatApp
+>>>>>>> bf096a0 (Initial commit)
