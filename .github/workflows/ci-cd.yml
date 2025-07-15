@@ -1,0 +1,52 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install backend dependencies
+        run: |
+          cd server
+          npm install
+      - name: Install frontend dependencies
+        run: |
+          cd ..
+          npm install
+      - name: Lint backend
+        run: |
+          cd server
+          npm run lint || true
+      - name: Lint frontend
+        run: |
+          cd ..
+          npm run lint || true
+      - name: Build frontend
+        run: |
+          npm run build
+      # Add test steps here if you have tests
+
+  # Example deploy jobs (uncomment and configure as needed)
+  # deploy-backend:
+  #   needs: build-and-test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy backend to Render/Railway/Heroku
+  #       run: echo "Deploy backend here"
+
+  # deploy-frontend:
+  #   needs: build-and-test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy frontend to Vercel/Netlify
+  #       run: echo "Deploy frontend here"

@@ -1,8 +1,13 @@
 // Entry point for the chat server
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const cors = require('cors');
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
@@ -15,11 +20,14 @@ const io = new Server(server, {
 
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
+app.use(morgan('combined'));
 
 // Simple in-memory user store
 let onlineUsers = {};
 
 io.on('connection', (socket) => {
+  
   console.log('A user connected:', socket.id);
 
   socket.on('join', (username) => {
@@ -47,7 +55,16 @@ io.on('connection', (socket) => {
   });
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => res.send('OK'));
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
+});
+
+// Global error handler (should be after all other app.use/app.get)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
